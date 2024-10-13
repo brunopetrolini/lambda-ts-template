@@ -1,6 +1,6 @@
 {
   "name": "lambda-ts-template",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A template for creating AWS Lambda functions using TypeScript and SAM",
   "author": "Bruno Petrolini <brunopetrolini@hotmail.com>",
   "license": "MIT",
