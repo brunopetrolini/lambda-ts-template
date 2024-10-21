@@ -1,0 +1,39 @@
+name: AWS Lambda Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        type: choice
+        options:
+          - homologation
+          - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup AWS SAM
+        uses: aws-actions/setup-sam@v1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Setup AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Build SAM Apllication
+        run: sam build
+
+      - name: Deploy
+        run: sam deploy --parameter-overrides Stage=${{ github.event.inputs.environment }}  --stack-name ${{ vars.STACK_NAME }} --capabilities "CAPABILITY_IAM" --resolve-s3
