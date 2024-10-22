@@ -46,8 +46,3 @@ Resources:
         Sourcemap: true
         EntryPoints:
           - src/application/handlers/hello-world.ts
-
-Outputs:
-  HelloWorldApi:
-    Description: API Gateway endpoint URL for Hello World function
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/{Stage}/hello'
