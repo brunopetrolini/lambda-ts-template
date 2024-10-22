@@ -36,4 +36,4 @@ jobs:
         run: sam build
 
       - name: Deploy
-        run: sam deploy --parameter-overrides Stage=${{ github.event.inputs.environment }}  --stack-name ${{ vars.STACK_NAME }} --capabilities "CAPABILITY_IAM" --resolve-s3
+        run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --parameter-overrides Stage=${{ github.event.inputs.environment }}  --stack-name ${{ vars.STACK_NAME }} --capabilities "CAPABILITY_IAM" --resolve-s3
