@@ -17,9 +17,10 @@ Parameters:
     Description: If is homologation or production
 
 Resources:
-  ApiGatewayRestApi:
-    Type: AWS::Serverless::Api
+  ApiGatewayEndpoint:
+    Type: "AWS::Serverless::Api"
     Properties:
+      Name: template
       StageName: !Ref Stage
       Cors: "'*'"
 
@@ -31,12 +32,12 @@ Resources:
       Architectures:
         - x86_64
       Events:
-        HelloWorld:
+        HTTP:
           Type: Api
           Properties:
-            RestApiId: !Ref ApiGatewayRestApi
+            RestApiId: !Ref ApiGatewayEndpoint
             Path: /hello
-            Method: post
+            Method: POST
     Metadata:
       BuildMethod: esbuild
       BuildProperties:
