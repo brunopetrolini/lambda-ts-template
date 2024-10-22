@@ -16,9 +16,11 @@ lint = true
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 resolve_s3 = true
-s3_prefix = "lambda-ts-template"
+s3_prefix = "hello-world-function"
 region = "us-east-1"
 image_repositories = []
+stack_name = "hello-world-function"
+parameter_overrides = "Stage=\"homologation\""
 
 [default.package.parameters]
 resolve_s3 = true
