@@ -23,7 +23,7 @@ Resources:
       StageName: !Ref Stage
       Cors: "'*'"
 
-  hello-world-function:
+  HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/application/handlers/hello-world.handler
@@ -34,6 +34,7 @@ Resources:
         HelloWorld:
           Type: Api
           Properties:
+            RestApiId: !Ref ServerlessRestApi
             Path: /hello
             Method: post
     Metadata:
@@ -48,4 +49,4 @@ Resources:
 Outputs:
   HelloWorldApi:
     Description: API Gateway endpoint URL for Hello World function
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/hello'
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/{Stage}/hello'
