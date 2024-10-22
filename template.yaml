@@ -17,7 +17,7 @@ Parameters:
     Description: If is homologation or production
 
 Resources:
-  ServerlessRestApi:
+  ApiGatewayRestApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: !Ref Stage
@@ -34,7 +34,7 @@ Resources:
         HelloWorld:
           Type: Api
           Properties:
-            RestApiId: !Ref ServerlessRestApi
+            RestApiId: !Ref ApiGatewayRestApi
             Path: /hello
             Method: post
     Metadata:
