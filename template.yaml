@@ -17,7 +17,13 @@ Parameters:
     Description: If is homologation or production
 
 Resources:
-  HelloWorldFunction:
+  ServerlessRestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Stage
+      Cors: "'*'"
+
+  hello-world-function:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/application/handlers/hello-world.handler
@@ -41,5 +47,5 @@ Resources:
 
 Outputs:
   HelloWorldApi:
-    Description: API Gateway endpoint URL for ${!Ref Stage} stage for Hello World function
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/hello/'
+    Description: API Gateway endpoint URL for Hello World function
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/${Stage}/hello'
